@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { BASE_URL } from '../services/helper';
 
 const UpdateCompany = () => {
     const [companies,setCompanies]= useState({});
@@ -18,7 +19,7 @@ const UpdateCompany = () => {
         companies.createdAt = null
         companies.updatedAt = null
         try {
-            const response = await axios.put(`http://localhost:3001/api/companies/${params.id}`, companies, {
+            const response = await axios.put(`${BASE_URL}/companies/${params.id}`, companies, {
                 headers: {
                     "Authorization": `Bearer ${Cookies.get("token")}`
                 }
@@ -31,7 +32,7 @@ const UpdateCompany = () => {
     }
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/api/companies/${params.id}`)
+        axios.get(`${BASE_URL}/api/companies/${params.id}`)
         .then((res)=>{
             console.log(res.data);
             setCompanies(res.data);

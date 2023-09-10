@@ -11,6 +11,8 @@ import { FormControl } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../services/helper";
+
 
 const CompaniesList = () => {
     const [companyList, setCompanyList] = React.useState([])
@@ -24,7 +26,7 @@ const CompaniesList = () => {
         setcompletedCompanies(filteredCompanies.filter((company) => company.year === 2024 && company.status==="completed"));
     };
     useEffect(() => {
-        axios.get("http://localhost:3001/api/companies/")
+        axios.get(`${BASE_URL}/api/companies/`)
         .then((res) => {
             console.log(res.data);
             setCompanyList(res.data);

@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../services/helper';
 
 const AddCompanies = () => {
     const [companies,setCompanies]= useState({}); 
@@ -12,7 +13,7 @@ const AddCompanies = () => {
     const addcompany=async(e)=>{ 
         e.preventDefault();
         try{
-            const response=await axios.post("http://localhost:3001/api/companies",companies, {
+            const response=await axios.post(`${BASE_URL}/api/companies`,companies, {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("token")}`,
                 }

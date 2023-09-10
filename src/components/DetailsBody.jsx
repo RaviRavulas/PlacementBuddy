@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { BASE_URL } from "../services/helper";
 const DetailsBody = (fields) => {
 
     const [company, setCompany] = useState({});
 
     useEffect(() => {
         console.log(fields.company);
-        axios.get(`http://localhost:3001/api/companies/${fields.company}`)
+        axios.get(`${BASE_URL}/api/companies/${fields.company}`)
             .then((res) => {
                 console.log(res.data);
                 setCompany(res.data);

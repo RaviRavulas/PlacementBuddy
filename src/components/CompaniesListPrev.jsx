@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../services/helper";
 
 const CompaniesListPrev = () => {
     const [companyList, setCompanyList] = React.useState([])
@@ -25,7 +26,7 @@ const CompaniesListPrev = () => {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:3001/api/companies/")
+        axios.get(`${BASE_URL}/api/companies/`)
         .then((res) => {
             setCompanyList(res.data);
             setCompanies(res.data.filter((company) => company.year === 2023));

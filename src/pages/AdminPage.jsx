@@ -30,7 +30,7 @@ const AdminPage = () => {
     };
     const getCompanies = async () => {
         try {
-            const response = await axios.get("http://localhost:3001/api/companies");
+            const response = await axios.get(`${BASE_URL}/api/companies`);
             setCompanyList(response.data);
             setOngoingCompanies(response.data.filter((company) => company.year === 2024 && company.status==="ongoing"));
             setcompletedCompanies(response.data.filter((company) => company.year === 2024 && company.status==="completed"));
@@ -42,7 +42,7 @@ const AdminPage = () => {
     const validateAuth = async () => {
         const token = Cookies.get("token")
         try {
-            const validate = await axios.get("http://localhost:3001/api/users/currentuser", {
+            const validate = await axios.get(`${BASE_URL}/api/users/currentuser`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

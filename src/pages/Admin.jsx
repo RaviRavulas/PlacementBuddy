@@ -6,6 +6,7 @@ import { useDebugValue, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { BASE_URL } from "../services/helper";
 const Admin = () => {
     const [user, setUser] = useState({
         username: "",
@@ -17,7 +18,7 @@ const Admin = () => {
     const Login = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:3001/api/users/login", user);
+            const res = await axios.post(`${BASE_URL}/api/users/login`, user);
             Cookies.set("token", res.data.accessToken);
             setResponse("Logged in successfully!")
             navigate("/adminpage")
@@ -29,7 +30,7 @@ const Admin = () => {
     const validateAuth = async () => {
         const token = Cookies.get("token")
         try {
-            const validate = await axios.get("http://localhost:3001/api/users/currentuser", {
+            const validate = await axios.get(`${BASE_URL}/api/users/currentuser`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

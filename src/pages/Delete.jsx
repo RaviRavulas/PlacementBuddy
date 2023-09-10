@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { BASE_URL } from "../services/helper";
 
 
 const Delete = () => {
@@ -13,7 +14,7 @@ const Delete = () => {
     }
     
     const deleteCompany = () => {
-        axios.delete("http://localhost:3001/api/companies/" + params.id, {
+        axios.delete(`${BASE_URL}/api/companies/` + params.id, {
             headers: {
                 Authorization: `Bearer ${Cookies.get("token")}`
             }
