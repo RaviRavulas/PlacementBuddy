@@ -14,6 +14,8 @@ import Cookies from "js-cookie";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import axios from "axios";
+import { BASE_URL } from "../services/helper";
+
 const AdminPage = () => {
     const [companyList, setCompanyList] = React.useState([]);
     const navigate=useNavigate();
