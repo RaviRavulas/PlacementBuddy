@@ -47,7 +47,7 @@ const UpdateCompany = () => {
         <Container>
         <h1 style={{background:"rgb(124, 148, 167)"}} className='text-center my-3'>Add Companies</h1>
         <Container className='addbox'>
-            <Form onSubmit={updateCompany}>
+            <Form>
                 <Form.Group controlId="year">
                     <Form.Label>Year</Form.Label>
                     <Form.Control type="text" placeholder="Enter Year" name="year" value={companies.year} onChange={(e)=>setCompanies({...companies,[e.target.name]:e.target.value})}/>
@@ -109,7 +109,7 @@ const UpdateCompany = () => {
                     <Form.Label>Archives Link</Form.Label>
                     <Form.Control type="text" placeholder="Enter Archives Link" name="archiveslink" value={companies.archiveslink} onChange={(e)=>setCompanies({...companies,[e.target.name]:e.target.value})}/>
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button onClick={updateCompany} variant="primary" type="submit">
                     UPDATE
                 </Button>
                 </Form>
