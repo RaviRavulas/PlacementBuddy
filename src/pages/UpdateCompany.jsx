@@ -19,7 +19,7 @@ const UpdateCompany = () => {
         companies.createdAt = null
         companies.updatedAt = null
         try {
-            const response = await axios.put(`${BASE_URL}/companies/${params.id}`, companies, {
+            const response = await axios.put(`${BASE_URL}/api/companies/${params.id}`, companies, {
                 headers: {
                     "Authorization": `Bearer ${Cookies.get("token")}`
                 }
