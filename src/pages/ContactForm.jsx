@@ -2,22 +2,31 @@ import React, { useState } from 'react';
 import { Form, Button, Nav, Container } from 'react-bootstrap';
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import axios from 'axios';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [batch, setBatch] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // You can implement your submission logic here
-    console.log('Form submitted:', { name, email, batch, feedback });
+    setMessage("Sending...")
+    axios.post("https://formspree.io/f/xjvqovzb", {name, email, batch, feedback})
+    .then(() => {
+      setMessage("Message sent!") 
+      setName('');
+      setEmail('');
+      setBatch('');
+      setFeedback('');
+    })
+    .catch(() => {
+      setMessage("There was an error!")
+    })
     // Reset form fields
-    setName('');
-    setEmail('');
-    setBatch('');
-    setFeedback('');
   };
 
   return (
@@ -73,6 +82,9 @@ const ContactForm = () => {
             Submit
           </Button>
           </Container>
+          <Form.Text>
+            {message}
+          </Form.Text>
         </Form>
       </Container>
     </Container>

@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap"
 import { Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch,faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Card } from "react-bootstrap";
@@ -17,7 +17,7 @@ import { BASE_URL } from "../services/helper";
 const CompaniesListPrev = () => {
     const [companyList, setCompanyList] = React.useState([])
     const [companies, setCompanies] = React.useState(companyList.filter((company) => company.year === 2023));
-    
+    const [loading,setLoading]=React.useState(true)
     const filterCompanies = (searchString) => {
         const filteredCompanies = companyList.filter((company) => {
             return company.title.toLowerCase().includes(searchString.toLowerCase());
@@ -28,6 +28,7 @@ const CompaniesListPrev = () => {
     useEffect(() => {
         axios.get(`${BASE_URL}/api/companies/`)
         .then((res) => {
+            setLoading(false)
             setCompanyList(res.data);
             setCompanies(res.data.filter((company) => company.year === 2023));
         })
@@ -37,6 +38,10 @@ const CompaniesListPrev = () => {
     }, [])
   return(
     <>
+    {loading? <div className="d-flex align-items-center justify-content-center text-center py-5" style={{minHeight:"100vh"}}>
+        <FontAwesomeIcon className="fa-spin" style={{fontSize:"3rem"}} icon={faSpinner}></FontAwesomeIcon>
+    </div> : 
+    <div>
       <Container className="d-flex justify-content-center">
         <InputGroup className="my-4 w-50">
             <FormControl placeholder="Search..." onChange={(e) => filterCompanies(e.target.value)}/>
@@ -73,6 +78,7 @@ const CompaniesListPrev = () => {
             }
         </Row>
       </Container>
+      </div>}
     </>
   );
 };
